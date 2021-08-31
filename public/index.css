@@ -1,0 +1,92 @@
+* {
+    outline: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+*:focus,
+*:active {
+    outline: 0.01em solid #f6f6f6;
+}
+html,
+body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Staatliches", cursive, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*	Custom design
+-----------------------------------------*/
+@media (prefers-color-scheme: light) {
+    :root {
+        --primary-color: #900c3f;
+        --secondary-color: #bf7b3f;
+        --contrast-text: #fff;
+
+        --text-primary: rgba(0, 0, 0, 0.87);
+        --text-secondary: rgba(0, 0, 0, 0.54);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #900c3f;
+        --secondary-color: #bf7b3f;
+
+        --text-primary: #fff;
+        --text-secondary: rgba(255, 255, 255, 0.7);
+    }
+}
+
+.container {
+    max-width: 1544px;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+    margin-right: auto;
+    margin-left: auto;
+    box-sizing: border-box;
+}
+.fx {
+    display: -ms-flexbox;
+    display: flex;
+}
+.fxd-col {
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+a {
+    color: var(--primary-color);
+}
+
+@media only screen and (max-width: 1439px) {
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (max-width: 767px) {
+    .container {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .container {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+}
