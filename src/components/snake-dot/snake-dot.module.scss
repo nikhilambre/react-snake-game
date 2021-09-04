@@ -1,0 +1,23 @@
+.dot {
+    display: flex;
+    width: 1.6rem;
+    height: 1.6rem;
+
+    span {
+        width: 1rem;
+        height: 1rem;
+        background-color: #e5e7eb;
+        margin: 0.3rem;
+        border-radius: 50%;
+    }
+}
+
+.dotActive {
+    span {
+        width: 1.2rem;
+        height: 1.2rem;
+        background-color: #9ca3af;
+        margin: 0.2rem;
+        border-radius: 0.2rem;
+    }
+}
