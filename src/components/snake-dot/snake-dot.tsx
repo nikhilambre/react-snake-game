@@ -1,14 +1,21 @@
+import {ISnakeElement} from "../../types";
 import classes from "./snake-dot.module.scss";
 
 type props = {
     x: number;
     y: number;
-    matrix: number[][];
+    snake: ISnakeElement[];
 };
 
-const SnakeDot = ({x, y, matrix}: props): JSX.Element => {
+const SnakeDot = ({x, y, snake}: props): JSX.Element => {
     return (
-        <div className={`${classes.dot} ${matrix[x][y] == 1 ? classes.dotActive : null}`}>
+        <div
+            className={`${classes.dot} ${
+                snake.some((e) => e.x === x && e.y === y) ? classes.dotActive : null
+            }`}
+            data-x={x}
+            data-y={y}
+        >
             <span></span>
         </div>
     );

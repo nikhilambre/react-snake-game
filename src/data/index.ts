@@ -1,26 +1,26 @@
 export const initialSnake = [
     {
-        x: 14,
+        x: 4,
         y: 10,
         counter: 5
     },
     {
-        x: 13,
+        x: 3,
         y: 10,
         counter: 4
     },
     {
-        x: 12,
+        x: 2,
         y: 10,
         counter: 3
     },
     {
-        x: 11,
+        x: 1,
         y: 10,
         counter: 2
     },
     {
-        x: 10,
+        x: 0,
         y: 10,
         counter: 1
     }
