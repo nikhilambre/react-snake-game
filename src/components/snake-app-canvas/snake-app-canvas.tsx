@@ -1,23 +1,20 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import SnakeDot from "../snake-dot/snake-dot";
 import {initialSnake} from "../../data";
-import {ISnakeElement, Directions} from "../../types";
-import {GetNewElement} from "../../utils";
+import {ISnakeElement} from "../../types";
+import {GetNewElement, ALLOWED_KEYS, GetDirectionForKey} from "../../utils";
 import classes from "./snake-app-canvas.module.scss";
 
 const SnakeAppCanvas = (): JSX.Element => {
-    const [direction, setDirection] = useState<Directions>(1); // 0-up, 1-right, 2-down, 3-left
+    const direction = useRef(1); // 0-up, 1-right, 2-down, 3-left
     const [speed, setSpeed] = useState<number>(5); // 1 to 5, beginner, medium, expert, pro, legend
     const [snake, setSnake] = useState<ISnakeElement[]>(initialSnake);
-    const [matrix, setMatrix] = useState<number[][]>(
-        Array.from({length: 20}, () => Array.from({length: 20}, () => 0))
-    );
 
     useEffect(() => {
         const interval = setInterval(() => {
             // add new ele based on direction
             setSnake((oldArray) => {
-                return [GetNewElement(oldArray[0], direction), ...oldArray].filter(
+                return [GetNewElement(oldArray[0], direction.current), ...oldArray].filter(
                     (_, i) => i !== snake.length
                 );
             });
@@ -28,7 +25,21 @@ const SnakeAppCanvas = (): JSX.Element => {
             console.log("ele", snake);
         }, speed * 200);
         return () => clearInterval(interval);
-    }, [snake, direction]);
+    }, [direction]);
+
+    const onKeyDown = (e: KeyboardEvent) => {
+        if (ALLOWED_KEYS.includes(e.key)) {
+            e.preventDefault();
+            direction.current = GetDirectionForKey(e.key, direction.current);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("keydown", onKeyDown);
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+        };
+    }, []);
 
     //  Create snake playground
     const rows = [...Array(20)].map((_, i) => {
