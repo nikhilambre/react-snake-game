@@ -11,6 +11,7 @@ const SnakeAppCanvas = (): JSX.Element => {
     const [snake, setSnake] = useState<ISnakeElement[]>(initialSnake);
 
     useEffect(() => {
+        document.addEventListener("keydown", onKeyDown);
         const interval = setInterval(() => {
             // add new ele based on direction
             setSnake((oldArray) => {
@@ -19,13 +20,16 @@ const SnakeAppCanvas = (): JSX.Element => {
                 );
             });
 
-            // in forEach - move snake by updating arr add in direction, dec counter & remove count 0 ele
             // if new ele is food update accordingly
 
             console.log("ele", snake);
         }, speed * 200);
-        return () => clearInterval(interval);
-    }, [direction]);
+
+        return () => {
+            clearInterval(interval);
+            document.removeEventListener("keydown", onKeyDown);
+        };
+    }, []);
 
     const onKeyDown = (e: KeyboardEvent) => {
         if (ALLOWED_KEYS.includes(e.key)) {
@@ -33,13 +37,6 @@ const SnakeAppCanvas = (): JSX.Element => {
             direction.current = GetDirectionForKey(e.key, direction.current);
         }
     };
-
-    useEffect(() => {
-        document.addEventListener("keydown", onKeyDown);
-        return () => {
-            document.removeEventListener("keydown", onKeyDown);
-        };
-    }, []);
 
     //  Create snake playground
     const rows = [...Array(20)].map((_, i) => {
