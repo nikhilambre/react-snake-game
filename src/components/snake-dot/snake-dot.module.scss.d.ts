@@ -3,6 +3,7 @@
 interface CssExports {
   'dot': string;
   'dotActive': string;
+  'dotFood': string;
 }
 export const cssExports: CssExports;
 export default cssExports;
